@@ -3,7 +3,9 @@
 This is a userscript to showcase the output of the wikifactmine pipeline as facts on individual wikidata items.
 
 # Instructions for Use
-
+Simply link to this file by adding:
+`mw.loader.load( 'https://rawgit.com/tarrow/wikifactmine-gadget/master/wikifactmine-gadget.js' );`
+to your [common.js](https://www.wikidata.org/wiki/Special:MyPage/common.js) on Wikidata.
 
 # Instructions for development
 The best way to work on this script is to host a local https server (with a self signed cert accepted by your browser) and to link to it by inserting the following into your [common.js](https://www.wikidata.org/wiki/Special:MyPage/common.js) on Wikidata:
