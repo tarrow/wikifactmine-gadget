@@ -1,3 +1,6 @@
+// Inspiration and a basic outline derived from Magnus Manske's https://www.wikidata.org/wiki/User:Magnus_Manske/authority_control.js script
+// Also Html from the wikibase team (obviously)
+
 var apiHost = 'https://tools.wmflabs.org'
 var apiPath = '/wikifactmine-api/api/item/'
 var titleid = "wfm-facts-title"
