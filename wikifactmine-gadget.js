@@ -1,54 +1,82 @@
 var apiHost = 'https://tools.wmflabs.org'
 var apiPath = '/wikifactmine-api/api/item/'
 var titleid = "wfm-facts-title"
-var titleHTML = "<h2 class='wb-section-heading section-heading' dir='auto' id='" + titleid + "' title='WikiFactMine Facts' style='overflow:auto'>\
-<span class='mw-headline' id='wfm-facts'>WikiFactMine Facts</span>\
-</h2>"
 
-var factListHTML = "<div class='wikibase-statementgroupview listview-item' >\
-<div class='wikibase-statementgroupview-property'>\
-<div class='wikibase-statementgroupview-property-label' dir='auto' style='position: relative; top: -0.01225px; left: 0px;' id='wfm-facts-list-real'>PMC123456</div>\
-</div>\
-<div class='wikibase-statementlistview'>\
-<div class='wikibase-statementlistview-listview'>\
-<div class='wikibase-statementview wb-normal listview-item wikibase-toolbar-item'> Prepost and fact</div>\
-<div class='wikibase-statementview-references-container'>\
-</div>\
-</div>\
-</div>\
-</div>\
-"
+// Escape HTML using http://stackoverflow.com/questions/6234773/can-i-escape-html-special-chars-in-javascript
+function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+ }
+
+var titleHTML = `<h2 class='wb-section-heading section-heading' dir='auto' id='" + titleid + "' title='WikiFactMine Facts' style='overflow:auto'>\
+<span class='mw-headline' id='wfm-facts'>WikiFactMine Facts</span>\
+</h2>
+    <div class="wikibase-statementgrouplistview">
+    <div class="wikibase-listview wikifactmine-listview" id="${titleid}">
+
+</div>
+<div class="wikibase-addtoolbar wikibase-toolbar-item wikibase-toolbar wikibase-addtoolbar-container wikibase-toolbar-container"><span class="wikibase-toolbarbutton wikibase-toolbar-item wikibase-toolbar-button wikibase-toolbar-button-add"><a href="#" title="Add a new statement"><span class="wb-icon"></span>add</a>
+  </span>
+</div>
+    </div>`
 
 function makePaperEntry(entry) {
     return `<div class="wikibase-statementgroupview listview-item" id="${entry.cprojectID}">
   <div class="wikibase-statementgroupview-property">
-    <div class="wikibase-statementgroupview-property-label" dir="auto" style="position: relative; top: 0.422351px; left: 0px;"><a title="${entry.cprojectID}" href="https://europepmc.org/articles/${entry.cprojectID}">${entry.cprojectID}</a></div>
+    <div class="wikibase-statementgroupview-property-label" dir="auto" style="position: relative; top: 0.183569px; left: 0px;"><a title="${entry.cprojectID}" href="https://europepmc.org/articles/${entry.cprojectID}">${entry.cprojectID}</a></div>
   </div>
   <div class="wikibase-statementlistview">
-	<div class="wikibase-statementlistview-listview">
-	</div>
+    <div class="wikibase-statementlistview-listview">
+
+    </div>
     <span class="wikibase-toolbar-container"></span>
+    <span class="wikibase-toolbar-wrapper"><div class="wikibase-addtoolbar wikibase-toolbar-item wikibase-toolbar wikibase-addtoolbar-container wikibase-toolbar-container"><span class="wikibase-toolbarbutton wikibase-toolbar-item wikibase-toolbar-button wikibase-toolbar-button-add"><a href="#" title="Add a new value"><span class="wb-icon"></span> </a>
+    </span>
+  </div>
+  </span>
 </div>
 </div>`
 }
 
 function makeFactListEntry(entry) {
-  return `<div class="wikibase-statementview wikibase-statement-thisisauuidreallyipromise wb-normal listview-item wikibase-toolbar-item">
-        <div class="wikibase-statementview-mainsnak-container">
-          <div class="wikibase-statementview-mainsnak" dir="auto">
-            <div class="wikibase-snakview">
-              <div class="wikibase-snakview-property-container">
-                <div class="wikibase-snakview-property" dir="auto"></div>
-              </div>
-              <div class="wikibase-snakview-value-container" dir="auto">
-                <div class="wikibase-snakview-typeselector"></div>
-                <div class="wikibase-snakview-value wikibase-snakview-variation-valuesnak"><a title="${entry.term}" href="#">${entry.prefix}${entry.term}${entry.post}</a></div>
-              </div>
-            </div>
-          </div>
+  return `<div class="wikibase-statementview wikifactmine-fact-thisistotallyuniqueipromise wb-normal listview-item wikibase-toolbar-item">
+  <div class="wikibase-statementview-rankselector">
+    <div class="wikibase-rankselector ui-state-disabled">
+      <span class="ui-icon ui-icon-rankselector wikibase-rankselector-normal" title="Normal rank"></span>
+    </div>
+  </div>
+  <div class="wikibase-statementview-mainsnak-container">
+    <div class="wikibase-statementview-mainsnak" dir="auto">
+      <div class="wikibase-snakview">
+        <div class="wikibase-snakview-property-container">
+          <div class="wikibase-snakview-property" dir="auto"></div>
+        </div>
+        <div class="wikibase-snakview-value-container" dir="auto">
+          <div class="wikibase-snakview-typeselector"></div>
+        <div class="wikibase-snakview-value wikibase-snakview-variation-valuesnak"><a title="${entry.term}" href="#">${escapeHtml(entry.prefix)}${escapeHtml(entry.term)}${escapeHtml(entry.post)}</a></div>
         </div>
       </div>
-    </div>`
+    </div>
+    <div class="wikibase-statementview-qualifiers"></div>
+  </div>
+  <span class="wikibase-toolbar-container wikibase-edittoolbar-container"><span class="wikibase-toolbar wikibase-toolbar-item wikibase-toolbar-container"><span class="wikibase-toolbarbutton wikibase-toolbar-item wikibase-toolbar-button wikibase-toolbar-button-edit"><a href="#" title=""><span class="wb-icon"></span>edit</a>
+  </span>
+  </span>
+  </span>
+  <div class="wikibase-statementview-references-container">
+    <div class="wikibase-statementview-references-heading"><a class="ui-toggler ui-toggler-toggle ui-state-default"><span class="ui-toggler-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-toggler-label">0 references</span></a></div>
+    <div class="wikibase-statementview-references ">
+      <div class="wikibase-addtoolbar wikibase-toolbar-item wikibase-toolbar wikibase-addtoolbar-container wikibase-toolbar-container"><span class="wikibase-toolbarbutton wikibase-toolbar-item wikibase-toolbar-button wikibase-toolbar-button-add"><a href="#" title=""><span class="wb-icon"></span>add reference</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`
 }
 
 var wfm = {
@@ -65,7 +93,6 @@ var wfm = {
     if (!wfm.enabled) {
       wfm.enabled = true
       $('#claims').before ( titleHTML )
-//      $('#'+titleid).after( factListHTML )
       var wid = mw.config.values.wbEntityId
       $.getJSON(apiHost+apiPath+wid, wfm.addEntries)
     }
@@ -79,9 +106,9 @@ var wfm = {
       // This formats HTML in the facts as escaped sequenced so we can see them
       var $paperBlob=$('#'+entry.cprojectID)
       if (!$paperBlob.length) {
-	  $('#'+titleid).after( makePaperEntry(entry) )
+	  $('#'+titleid).append( makePaperEntry(entry) )
       }
-	  $('#'+entry.cprojectID).after( makeFactListEntry(entry) )
+	  $('#'+entry.cprojectID).append( makeFactListEntry(entry) )
       
   }
 }
