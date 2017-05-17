@@ -34,7 +34,7 @@ function makePaperEntry(entry) {
 
     </div>
     <span class="wikibase-toolbar-container"></span>
-    <span class="wikibase-toolbar-wrapper"><div class="wikibase-addtoolbar wikibase-toolbar-item wikibase-toolbar wikibase-addtoolbar-container wikibase-toolbar-container"><span class="wikibase-toolbarbutton wikibase-toolbar-item wikibase-toolbar-button wikibase-toolbar-button-add"><a href="#" title="Add a new value"><span class="wb-icon"></span> </a>
+    <span class="wikibase-toolbar-wrapper"><div class="wikibase-addtoolbar wikibase-toolbar-item wikibase-toolbar wikibase-addtoolbar-container wikibase-toolbar-container"><span class="wikibase-toolbarbutton wikibase-toolbar-item wikibase-toolbar-button wikibase-toolbar-button-add">
     </span>
   </div>
   </span>
@@ -46,7 +46,7 @@ function makeFactListEntry(entry) {
   return `<div class="wikibase-statementview wikifactmine-fact-thisistotallyuniqueipromise wb-normal listview-item wikibase-toolbar-item">
   <div class="wikibase-statementview-rankselector">
     <div class="wikibase-rankselector ui-state-disabled">
-      <span class="ui-icon ui-icon-rankselector wikibase-rankselector-normal" title="Normal rank"></span>
+     
     </div>
   </div>
   <div class="wikibase-statementview-mainsnak-container">
@@ -63,14 +63,14 @@ function makeFactListEntry(entry) {
     </div>
     <div class="wikibase-statementview-qualifiers"></div>
   </div>
-  <span class="wikibase-toolbar-container wikibase-edittoolbar-container"><span class="wikibase-toolbar wikibase-toolbar-item wikibase-toolbar-container"><span class="wikibase-toolbarbutton wikibase-toolbar-item wikibase-toolbar-button wikibase-toolbar-button-edit"><a href="#" title=""><span class="wb-icon"></span>edit</a>
+  <span class="wikibase-toolbar-container wikibase-edittoolbar-container"><span class="wikibase-toolbar wikibase-toolbar-item wikibase-toolbar-container"><span class="wikibase-toolbarbutton wikibase-toolbar-item wikibase-toolbar-button wikibase-toolbar-button-edit"><a href="#" title=""></a>
   </span>
   </span>
   </span>
   <div class="wikibase-statementview-references-container">
-    <div class="wikibase-statementview-references-heading"><a class="ui-toggler ui-toggler-toggle ui-state-default"><span class="ui-toggler-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-toggler-label">0 references</span></a></div>
+    <div class="wikibase-statementview-references-heading"><a class="ui-toggler ui-toggler-toggle ui-state-default"></a></div>
     <div class="wikibase-statementview-references ">
-      <div class="wikibase-addtoolbar wikibase-toolbar-item wikibase-toolbar wikibase-addtoolbar-container wikibase-toolbar-container"><span class="wikibase-toolbarbutton wikibase-toolbar-item wikibase-toolbar-button wikibase-toolbar-button-add"><a href="#" title=""><span class="wb-icon"></span>add reference</a>
+      <div class="wikibase-addtoolbar wikibase-toolbar-item wikibase-toolbar wikibase-addtoolbar-container wikibase-toolbar-container"><span class="wikibase-toolbarbutton wikibase-toolbar-item wikibase-toolbar-button wikibase-toolbar-button-add"><a href="#" title=""></a>
         </span>
       </div>
     </div>
@@ -108,7 +108,7 @@ var wfm = {
       if (!$paperBlob.length) {
 	  $('#'+titleid).append( makePaperEntry(entry) )
       }
-	  $('#'+entry.cprojectID).append( makeFactListEntry(entry) )
+      $('#'+entry.cprojectID).find('.wikibase-statementlistview-listview').append( makeFactListEntry(entry) )
       
   }
 }
